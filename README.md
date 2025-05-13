@@ -1,178 +1,117 @@
-# H1 heading
-## H2 heading 
-### H3 heading 
-#### H4 heading 
-##### H5 heading 
-###### H6 heading 
-Alternatively, for H1 and H2, an underline-ish style:
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Sun, Moon, Mail, Github, Linkedin } from "lucide-react";
+import { motion } from "framer-motion";
 
-Alt-H1
-======
+export default function Home() {
+  const [dark, setDark] = useState(false);
 
-Alt-H2
-------
+  return (
+    <main className={`${dark ? "dark bg-gray-900 text-white" : "bg-white text-black"} min-h-screen px-6 py-8 transition-all`}> 
+      <header className="flex justify-between items-center mb-10">
+        <h1 className="text-3xl font-bold tracking-tight">Dr. Jane Doe</h1>
+        <Button variant="outline" onClick={() => setDark(!dark)}>
+          {dark ? <Sun /> : <Moon />}
+        </Button>
+      </header>
 
-Emphasis, aka italics, with *asterisks* or _underscores_.
+      <section className="grid md:grid-cols-2 gap-8 items-center mb-16">
+        <motion.img
+          src="/profile.jpg"
+          alt="Profile"
+          className="rounded-2xl shadow-xl w-full max-w-xs mx-auto"
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+        />
+        <div>
+          <h2 className="text-4xl font-bold mb-4">Hi, I'm Dr. Jane Doe</h2>
+          <p className="text-lg leading-relaxed">
+            A passionate Computer Scientist, AI Researcher, and Software Architect focused on building scalable, intelligent systems that create real-world impact.
+          </p>
+          <div className="flex gap-4 mt-4">
+            <a href="mailto:jane.doe@example.com"><Mail /></a>
+            <a href="https://github.com/janedoe"><Github /></a>
+            <a href="https://linkedin.com/in/janedoe"><Linkedin /></a>
+          </div>
+        </div>
+      </section>
 
-Strong emphasis, aka bold, with **asterisks** or __underscores__.
+      <section className="mb-16">
+        <h3 className="text-2xl font-semibold mb-4">Core Skills</h3>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {["JavaScript", "React", "Next.js", "Python", "Django", "Node.js", "SQL", "NoSQL", "Git", "Docker", "Kubernetes", "Tailwind CSS", "Machine Learning", "Deep Learning", "Data Visualization"].map((skill) => (
+            <Card key={skill}><CardContent className="p-4 text-center font-medium">{skill}</CardContent></Card>
+          ))}
+        </div>
+      </section>
 
-Combined emphasis with **asterisks and _underscores_**.
+      <section className="mb-16">
+        <h3 className="text-2xl font-semibold mb-4">Featured Projects</h3>
+        <div className="grid md:grid-cols-2 gap-6">
+          <Card>
+            <CardContent className="p-4">
+              <h4 className="font-bold text-lg">AI Research Toolkit</h4>
+              <p className="text-sm text-muted-foreground mb-2">A Python-based toolkit for prototyping AI models with fast visualization and benchmarking.</p>
+              <a className="text-blue-500" href="https://github.com/janedoe/ai-toolkit">View Code</a>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardContent className="p-4">
+              <h4 className="font-bold text-lg">Smart Portfolio App</h4>
+              <p className="text-sm text-muted-foreground mb-2">A Next.js app to track and visualize investment portfolios in real-time.</p>
+              <a className="text-blue-500" href="https://janedoe.app">Live Site</a>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
 
-Strikethrough uses two tildes. ~~Scratch this.~~
+      <section className="mb-16">
+        <h3 className="text-2xl font-semibold mb-4">Experience</h3>
+        <ul className="space-y-4">
+          <li>
+            <strong>Lead AI Engineer</strong> at DeepMind (2022–Present)
+            <p className="text-sm">Designing robust ML models for healthcare diagnostics and NLP systems with scalable APIs.</p>
+          </li>
+          <li>
+            <strong>Software Engineer</strong> at Google (2019–2022)
+            <p className="text-sm">Built cloud-native solutions and optimized backend services for global-scale infrastructure.</p>
+          </li>
+        </ul>
+      </section>
 
+      <section className="mb-16">
+        <h3 className="text-2xl font-semibold mb-4">Education</h3>
+        <ul className="space-y-2">
+          <li><strong>Ph.D. in Artificial Intelligence</strong>, MIT, 2021</li>
+          <li><strong>M.Tech in Computer Science</strong>, Stanford University, 2017</li>
+          <li><strong>B.Tech in CSE</strong>, IIT Bombay, 2015</li>
+        </ul>
+      </section>
 
-1. First ordered list item
-2. Another item
-⋅⋅* Unordered sub-list. 
-1. Actual numbers don't matter, just that it's a number
-⋅⋅1. Ordered sub-list
-4. And another item.
+      <section className="mb-16">
+        <h3 className="text-2xl font-semibold mb-4">Certifications & Awards</h3>
+        <ul className="list-disc pl-6 space-y-1 text-sm">
+          <li>Google AI Fellowship, 2020</li>
+          <li>Certified Kubernetes Administrator (CKA)</li>
+          <li>MIT Technology Review Innovator Under 35, 2022</li>
+        </ul>
+      </section>
 
-⋅⋅⋅You can have properly indented paragraphs within list items. Notice the blank line above, and the leading spaces (at least one, but we'll use three here to also align the raw Markdown).
+      <section>
+        <h3 className="text-2xl font-semibold mb-4">Contact</h3>
+        <form className="grid gap-4 max-w-xl">
+          <input className="border rounded p-2" type="text" placeholder="Your Name" required />
+          <input className="border rounded p-2" type="email" placeholder="Your Email" required />
+          <textarea className="border rounded p-2" rows={4} placeholder="Your Message"></textarea>
+          <Button type="submit">Send Message</Button>
+        </form>
+      </section>
 
-⋅⋅⋅To have a line break without a paragraph, you will need to use two trailing spaces.⋅⋅
-⋅⋅⋅Note that this line is separate, but within the same paragraph.⋅⋅
-⋅⋅⋅(This is contrary to the typical GFM line break behaviour, where trailing spaces are not required.)
-
-* Unordered list can use asterisks
-- Or minuses
-+ Or pluses
-
-[I'm an inline-style link](https://www.google.com)
-
-[I'm an inline-style link with title](https://www.google.com "Google's Homepage")
-
-[I'm a reference-style link][Arbitrary case-insensitive reference text]
-
-[I'm a relative reference to a repository file](../blob/master/LICENSE)
-
-[You can use numbers for reference-style link definitions][1]
-
-Or leave it empty and use the [link text itself].
-
-URLs and URLs in angle brackets will automatically get turned into links. 
-http://www.example.com or <http://www.example.com> and sometimes 
-example.com (but not on Github, for example).
-
-Some text to show that the reference links can follow later.
-
-[arbitrary case-insensitive reference text]: https://www.mozilla.org
-[1]: http://slashdot.org
-[link text itself]: http://www.reddit.com
-
-Here's our logo (hover to see the title text):
-
-Inline-style: 
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
-
-Reference-style: 
-![alt text][logo]
-
-[logo]: https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 2"
-
-
-Inline `code` has `back-ticks around` it.
-
-
-```javascript
-var s = "JavaScript syntax highlighting";
-alert(s);
-```
- 
-```python
-s = "Python syntax highlighting"
-print s
-```
- 
-```
-No language indicated, so no syntax highlighting. 
-But let's throw in a <b>tag</b>.
-```
-
-var s = "JavaScript syntax highlighting";
-alert(s);
-
-s = "Python syntax highlighting"
-print s
-
-No language indicated, so no syntax highlighting in Markdown Here (varies on Github). 
-But let's throw in a <b>tag</b>.
-
-Here is a simple footnote[^1].
-
-A footnote can also have multiple lines[^2].  
-
-You can also use words, to fit your writing style more closely[^note].
-
-[^1]: My reference.
-[^2]: Every new line should be prefixed with 2 spaces.  
-  This allows you to have a footnote with multiple lines.
-[^note]:
-    Named footnotes will still render with numbers instead of the text but allow easier identification and linking.  
-    This footnote also has been made with a different syntax using 4 spaces for new lines.
-
-
-
-    Colons can be used to align columns.
-
-| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
-
-There must be at least 3 dashes separating each header cell.
-The outer pipes (|) are optional, and you don't need to make the 
-raw Markdown line up prettily. You can also use inline Markdown.
-
-Markdown | Less | Pretty
---- | --- | ---
-*Still* | `renders` | **nicely**
-1 | 2 | 3
-
-
-
-> Blockquotes are very handy in email to emulate reply text.
-> This line is part of the same quote.
-
-Quote break.
-
-> This is a very long line that will still be quoted properly when it wraps. Oh boy let's keep writing to make sure this is long enough to actually wrap for everyone. Oh, you can *put* **Markdown** into a blockquote.
-
-
-<dl>
-  <dt>Definition list</dt>
-  <dd>Is something people use sometimes.</dd>
-
-  <dt>Markdown in HTML</dt>
-  <dd>Does *not* work **very** well. Use HTML <em>tags</em>.</dd>
-</dl>
-
-Three or more...
-
----
-
-Hyphens
-
-***
-
-Asterisks
-
-___
-
-Underscores
-
-Here's a line for us to start with.
-
-This line is separated from the one above by two newlines, so it will be a *separate paragraph*.
-
-This line is also a separate paragraph, but...
-This line is only separated by a single newline, so it's a separate line in the *same paragraph*.
-
-
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=YOUTUBE_VIDEO_ID_HERE
-" target="_blank"><img src="http://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg" 
-alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10" /></a>
-
-
-[![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](http://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID_HERE)
+      <footer className="mt-20 text-center text-sm text-muted-foreground">
+        © {new Date().getFullYear()} Dr. Jane Doe. All rights reserved.
+      </footer>
+    </main>
+  );
+}
